@@ -76,19 +76,6 @@ rescue
   nil
 end
 
-# threads << Thread.new do
-#   # delete and recreate some pods
-#   loop do
-#     operational_pods = podnames.clone
-#     operational_pods.each do |pod|
-#       if delete_pod(pod.pod_name)
-#         podnames.delete(pod.pod_name)
-#       end
-#       sleep(20)
-#     end
-#   end
-# end
-
 def delete_pod(pod_name)
   t = `oc get pod #{pod_name} -o json`
   pod_info = JSON.load(t)
