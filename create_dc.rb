@@ -98,4 +98,4 @@ class CreateDc
   end
 end
 
-DcDetail.new.create(10, 5)
+CreateDc.new.create(10, 5)
