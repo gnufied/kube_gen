@@ -15,7 +15,7 @@ spec:
         command:
           - "/bin/sh"
           - "-c"
-          - "while true; do; echo \"<%= @dc_name %> `date`\" >>/mnt/test/date; sleep 1; done"
+          - "while true; do date; echo \"<%= @dc_name %> `date`\" >>/mnt/test/date; sleep 1; done"
         volumeMounts:
           - name: vol
             mountPath: /mnt/test
