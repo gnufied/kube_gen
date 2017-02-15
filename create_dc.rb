@@ -55,7 +55,7 @@ class CreateDc
       fl.write(pvc_result_yaml)
     end
     puts "Creating pvc #{pvc_name}"
-    system("oc create -f /tmp/#{pvc_name}.yaml")
+    system("kubectl create -f /tmp/#{pvc_name}.yaml")
     check_for_pvc(pvc_name)
 
     # create dc
@@ -65,13 +65,13 @@ class CreateDc
       fl.write(dc_result_yaml)
     end
     puts "Creating dc #{dc_name}"
-    system("oc create -f /tmp/#{dc_name}.yaml")
+    system("kubectl create -f /tmp/#{dc_name}.yaml")
     check_for_dc(dc_name)
   end
 
   def check_for_dc(dc_name)
     loop do
-      t = `oc get deployments #{dc_name} -o json`
+      t = `kubectl get deployments #{dc_name} -o json`
       dc_info = load_json(t)
       if dc_info && dc_info["status"] && dc_info["status"]["availableReplicas"] == 1
         return true
@@ -82,7 +82,7 @@ class CreateDc
 
   def check_for_pvc(pvc_name)
     loop do
-      t = `oc get pvc #{pvc_name} -o json`
+      t = `kubectl get pvc #{pvc_name} -o json`
       pvc_info = load_json(t)
       if pvc_info && pvc_info["status"] && pvc_info["status"]["phase"] == "Bound"
         return true
