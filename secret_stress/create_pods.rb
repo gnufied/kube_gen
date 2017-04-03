@@ -1,7 +1,6 @@
 require 'yaml'
 require 'erb'
 require 'base64'
-require 'pry'
 require 'json'
 
 class PodDetail

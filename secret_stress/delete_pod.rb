@@ -1,7 +1,6 @@
 require 'yaml'
 require 'erb'
 require 'base64'
-require 'pry'
 require 'json'
 
 
@@ -18,17 +17,17 @@ class DeletePod
     end
   end
 
-  def delete_pods
-    index = 0
+  def delete_pods(start_index = 0)
+    index = start_index
     loop do
       pod_name = "pod-#{index}"
-      # check_for_pod(pod_name)
+      check_for_pod(pod_name)
       puts "Deleting pod #{pod_name}"
       system("kubectl delete pod #{pod_name}")
-      # if $? != 0
-      #   index = 0
-      #   next
-      # end
+      if $? != 0
+        index = 0
+        next
+      end
       index += 1
       sleep(1)
     end
