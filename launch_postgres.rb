@@ -16,4 +16,4 @@ class LaunchPostgres
 end
 
 lp = LaunchPostgres.new("foobar")
-pl.create
+lp.create
